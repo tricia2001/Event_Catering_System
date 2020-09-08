@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventErrorMsgs.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">EventErrorMsgs.java</span></div><h1>EventErrorMsgs.java</h1><pre class="source lang-java linenums">package Project.model;
+
+public class EventErrorMsgs {
+
+	private String errorMsg;
+	private String eventDateError;
+	private String eventTimeError;
+	private String durationError;
+	private String attendeeError;
+	private String eventNameError;
+	private String catererError;
+	private String userNamesError;
+
+
+<span class="fc" id="L15">	public EventErrorMsgs() {</span>
+<span class="fc" id="L16">		this.errorMsg = &quot;&quot;;</span>
+<span class="fc" id="L17">		this.eventDateError = &quot;&quot;;</span>
+<span class="fc" id="L18">		this.eventTimeError = &quot;&quot;;</span>
+<span class="fc" id="L19">		this.durationError = &quot;&quot;;</span>
+<span class="fc" id="L20">		this.attendeeError = &quot;&quot;;</span>
+<span class="fc" id="L21">		this.eventNameError = &quot;&quot;;</span>
+<span class="fc" id="L22">		this.catererError = &quot;&quot;;</span>
+<span class="fc" id="L23">		this.userNamesError = &quot;&quot;;</span>
+<span class="fc" id="L24">	}</span>
+
+	public String getErrorMsg() {
+<span class="fc" id="L27">		return errorMsg;</span>
+	}
+//
+//  NOTE: 	The following code is not representative of how this would be coded in an industrial application.
+//			We are using this code to maximize the ability of Pit to mutate the code to determine how
+//			good the developed test cases are. This course is using this Java backend code as an application
+//			of the principles learned in CSE 5321 only.
+//	
+	public void setErrorMsg() {
+<span class="pc bpc" id="L36" title="4 of 8 branches missed.">		if (!eventDateError.equals(&quot;&quot;) || !eventTimeError.equals(&quot;&quot;) || !durationError.equals(&quot;&quot;) || !attendeeError.equals(&quot;&quot;) ||</span>
+<span class="pc bpc" id="L37" title="2 of 6 branches missed.">				!eventNameError.equals(&quot;&quot;) || !catererError.equals(&quot;&quot;) || !userNamesError.equals(&quot;&quot;))</span>
+<span class="fc" id="L38">			this.errorMsg = &quot;Please correct the following errors&quot;;</span>
+<span class="fc" id="L39">	}</span>
+	public String getEventDateError() {
+<span class="fc" id="L41">		return eventDateError;</span>
+	}
+	public void setEventDateError(String eventDateError) {
+<span class="nc" id="L44">		this.eventDateError = eventDateError;</span>
+<span class="nc" id="L45">	}</span>
+	public String getEventTimeError() {
+<span class="fc" id="L47">		return eventTimeError;</span>
+	}
+
+	public void setEventTimeError(String eventTimeError) {
+<span class="nc" id="L51">		this.eventTimeError = eventTimeError;</span>
+<span class="nc" id="L52">	}</span>
+	public String getDurationError() {
+<span class="fc" id="L54">		return durationError;</span>
+	}
+
+	public void setDurationError(String durationError) {
+<span class="nc" id="L58">		this.durationError = durationError;</span>
+<span class="nc" id="L59">	}</span>
+	public String getAttendeeError() {
+<span class="fc" id="L61">		return attendeeError;</span>
+	}
+
+	public void setAttendeeError(String attendeeError) {
+<span class="nc" id="L65">		this.attendeeError = attendeeError;</span>
+<span class="nc" id="L66">	}</span>
+	public String getEventNameError() {
+<span class="fc" id="L68">		return eventNameError;</span>
+	}
+
+	public void setEventNameError(String eventNameError) {
+<span class="nc" id="L72">		this.eventNameError = eventNameError;</span>
+<span class="nc" id="L73">	}</span>
+
+	public String getCatererError() {
+<span class="fc" id="L76">		return catererError;</span>
+	}
+
+	public void setCatererError(String catererError) {
+<span class="fc" id="L80">		this.catererError = catererError;</span>
+<span class="fc" id="L81">	}</span>
+
+	public String getUserNamesError() {
+<span class="fc" id="L84">		return userNamesError;</span>
+	}
+
+	public void setUserNamesError(String userNamesError) {
+<span class="fc" id="L88">		this.userNamesError = userNamesError;</span>
+<span class="fc" id="L89">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

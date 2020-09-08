@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventDAO.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.data</a> &gt; <span class="el_source">EventDAO.java</span></div><h1>EventDAO.java</h1><pre class="source lang-java linenums">package Project.data;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import Project.util.SQLConnection;
+import Project.controller.EventController;
+import Project.model.Event;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.sql.Date;
+
+<span class="nc" id="L19">public class EventDAO {</span>
+
+<span class="fc" id="L21">	private static final Logger LOGGER = Logger.getLogger(EventDAO.class.getName());</span>
+	   
+<span class="fc" id="L23">	static SQLConnection DBMgr = SQLConnection.getInstance();</span>
+	
+	private static ArrayList&lt;Event&gt; ReturnMatchingEventsList (String queryString) {
+<span class="nc" id="L26">		ArrayList&lt;Event&gt; eventListInDB = new ArrayList&lt;Event&gt;();</span>
+		
+<span class="nc" id="L28">		Statement stmt = null;</span>
+<span class="nc" id="L29">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L31">			stmt = conn.createStatement();</span>
+<span class="nc" id="L32">			ResultSet eventList = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">			while (eventList.next()) {</span>
+<span class="nc" id="L34">				Event event = new Event(); </span>
+<span class="nc" id="L35">				event.setAttendees(eventList.getString(&quot;attendees&quot;));</span>
+<span class="nc" id="L36">				event.setCatererUsername(eventList.getString(&quot;caterer_username&quot;));</span>
+<span class="nc" id="L37">				event.setCatererLast(eventList.getString(&quot;caterer_last_name&quot;)); </span>
+<span class="nc" id="L38">				event.setCatererFirst(eventList.getString(&quot;caterer_first_name&quot;)); </span>
+<span class="nc" id="L39">				event.setDate(eventList.getString(&quot;date&quot;));</span>
+<span class="nc" id="L40">				event.setDrinkType(eventList.getString(&quot;drink_type&quot;)); </span>
+<span class="nc" id="L41">				event.setDuration(eventList.getString(&quot;duration&quot;)); </span>
+<span class="nc" id="L42">				event.setEntertainment(eventList.getString(&quot;entertainment&quot;)); </span>
+<span class="nc" id="L43">				event.setEstimatedCost(eventList.getString(&quot;estimated_cost&quot;)); </span>
+<span class="nc" id="L44">				event.setEventId(eventList.getInt(&quot;eventID&quot;)); </span>
+<span class="nc" id="L45">				event.setEventName(eventList.getString(&quot;event_name&quot;)); </span>
+<span class="nc" id="L46">				event.setFoodType(eventList.getString(&quot;food&quot;));  </span>
+<span class="nc" id="L47">				event.setFormality(eventList.getString(&quot;formality&quot;)); </span>
+<span class="nc" id="L48">				event.setHall(eventList.getString(&quot;hall&quot;)); </span>
+<span class="nc" id="L49">				event.setMeal(eventList.getString(&quot;meal&quot;)); </span>
+<span class="nc" id="L50">				event.setStatus(eventList.getString(&quot;status&quot;)); </span>
+<span class="nc" id="L51">				event.setTime(eventList.getString(&quot;start_time&quot;)); </span>
+<span class="nc" id="L52">				event.setUsername(eventList.getString(&quot;username&quot;));</span>
+<span class="nc" id="L53">				event.setUserLast(eventList.getString(&quot;last_name&quot;));</span>
+<span class="nc" id="L54">				event.setUserFirst(eventList.getString(&quot;first_name&quot;)); </span>
+<span class="nc" id="L55">				eventListInDB.add(event);	</span>
+			}
+<span class="nc" id="L57">		} catch (SQLException e) {}</span>
+<span class="nc" id="L58">		return eventListInDB;</span>
+	}
+	
+	private static ArrayList&lt;Event&gt; ReturnMatchingEventsListNoNames (String queryString) {
+<span class="nc" id="L62">		ArrayList&lt;Event&gt; eventListInDB = new ArrayList&lt;Event&gt;();</span>
+		
+<span class="nc" id="L64">		Statement stmt = null;</span>
+<span class="nc" id="L65">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L67">			stmt = conn.createStatement();</span>
+<span class="nc" id="L68">			ResultSet eventList = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">			while (eventList.next()) {</span>
+<span class="nc" id="L70">				Event event = new Event(); </span>
+<span class="nc" id="L71">				event.setAttendees(eventList.getString(&quot;attendees&quot;));</span>
+<span class="nc" id="L72">				event.setCatererUsername(eventList.getString(&quot;caterer_username&quot;));</span>
+<span class="nc" id="L73">				event.setDate(eventList.getString(&quot;date&quot;));</span>
+<span class="nc" id="L74">				event.setDrinkType(eventList.getString(&quot;drink_type&quot;)); </span>
+<span class="nc" id="L75">				event.setDuration(eventList.getString(&quot;duration&quot;)); </span>
+<span class="nc" id="L76">				event.setEntertainment(eventList.getString(&quot;entertainment&quot;)); </span>
+<span class="nc" id="L77">				event.setEstimatedCost(eventList.getString(&quot;estimated_cost&quot;)); </span>
+<span class="nc" id="L78">				event.setEventId(eventList.getInt(&quot;eventID&quot;)); </span>
+<span class="nc" id="L79">				event.setEventName(eventList.getString(&quot;event_name&quot;)); </span>
+<span class="nc" id="L80">				event.setFoodType(eventList.getString(&quot;food&quot;));  </span>
+<span class="nc" id="L81">				event.setFormality(eventList.getString(&quot;formality&quot;)); </span>
+<span class="nc" id="L82">				event.setHall(eventList.getString(&quot;hall&quot;)); </span>
+<span class="nc" id="L83">				event.setMeal(eventList.getString(&quot;meal&quot;)); </span>
+<span class="nc" id="L84">				event.setStatus(eventList.getString(&quot;status&quot;)); </span>
+<span class="nc" id="L85">				event.setTime(eventList.getString(&quot;start_time&quot;)); </span>
+<span class="nc" id="L86">				event.setUsername(eventList.getString(&quot;username&quot;));</span>
+<span class="nc" id="L87">				eventListInDB.add(event);	</span>
+			}
+<span class="nc" id="L89">		} catch (SQLException e) {}</span>
+<span class="nc" id="L90">		return eventListInDB;</span>
+	}
+	
+	public static void insertEvent (Event event) {
+<span class="nc" id="L94">		Statement stmt = null;</span>
+<span class="nc" id="L95">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L97">			stmt = conn.createStatement();</span>
+<span class="nc" id="L98">			String insertEvent = &quot;INSERT INTO CATERING.EVENT (eventID,username,date,start_time,duration,hall,attendees,&quot;</span>
+					+ &quot;event_name,food,meal,formality,drink_type,entertainment,status,estimated_cost) &quot; + &quot; VALUES (&quot;  
+<span class="nc" id="L100">					+ event.getEventId()  + &quot;,'&quot;</span>
+<span class="nc" id="L101">					+ event.getUsername() + &quot;',&quot;		</span>
+<span class="nc" id="L102">					+ &quot;STR_TO_DATE('&quot;+event.getDate() +&quot;', '%Y-%m-%d'),'&quot;</span>
+<span class="nc" id="L103">					+ event.getTime() + &quot;','&quot;</span>
+<span class="nc" id="L104">					+ event.getDuration() + &quot;','&quot;</span>
+<span class="nc" id="L105">					+ event.getHall() + &quot;',&quot;</span>
+<span class="nc" id="L106">					+ event.getAttendees() + &quot;,'&quot;</span>
+<span class="nc" id="L107">					+ event.getEventName() + &quot;','&quot;</span>
+<span class="nc" id="L108">					+ event.getFoodType() + &quot;','&quot;</span>
+<span class="nc" id="L109">					+ event.getMeal() + &quot;','&quot;</span>
+<span class="nc" id="L110">					+ event.getFormality() + &quot;','&quot;</span>
+<span class="nc" id="L111">					+ event.getDrinkType() + &quot;','&quot;</span>
+<span class="nc" id="L112">					+ event.getEntertainment() + &quot;',&quot;</span>
+<span class="nc" id="L113">					+ &quot;'saved',&quot;</span>
+<span class="nc" id="L114">					+ event.getEstimatedCost().substring(1) + &quot;)&quot;;</span>
+<span class="nc" id="L115">			stmt.executeUpdate(insertEvent);	</span>
+<span class="nc" id="L116">			conn.commit(); </span>
+<span class="nc" id="L117">		} catch (SQLException e) {}</span>
+<span class="nc" id="L118">	}</span>
+	public static void updateEvent (Event event) {
+<span class="nc" id="L120">		Statement stmt = null;</span>
+<span class="nc" id="L121">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L123">			stmt = conn.createStatement();</span>
+<span class="nc" id="L124">			String insertEvent = &quot;UPDATE CATERING.EVENT SET &quot;   </span>
+					+ &quot;username = (SELECT username FROM catering.system_user &quot; +
+<span class="nc" id="L126">					&quot;WHERE '&quot;+event.getUserLast()+&quot;' = last_name AND '&quot;+event.getUserFirst()+&quot;' &quot;</span>
+<span class="nc" id="L127">					+&quot; = first_name),&quot;		</span>
+<span class="nc" id="L128">					+ &quot;date = STR_TO_DATE('&quot;+event.getDate() +&quot;', '%Y-%m-%d'),&quot;</span>
+<span class="nc" id="L129">					+ &quot;start_time = '&quot;+event.getTime() + &quot;',&quot;</span>
+<span class="nc" id="L130">					+ &quot;duration = '&quot;+event.getDuration() + &quot;', &quot;</span>
+<span class="nc" id="L131">					+ &quot;hall = '&quot;+event.getHall() + &quot;', &quot;</span>
+<span class="nc" id="L132">					+ &quot;attendees = '&quot;+event.getAttendees() + &quot;', &quot;</span>
+<span class="nc" id="L133">					+ &quot;event_name = '&quot;+event.getEventName() + &quot;', &quot;</span>
+<span class="nc" id="L134">					+ &quot;food = '&quot;+event.getFoodType() + &quot;', &quot;</span>
+<span class="nc" id="L135">					+ &quot;meal = '&quot;+event.getMeal() + &quot;', &quot;</span>
+<span class="nc" id="L136">					+ &quot;formality = '&quot;+event.getFormality() + &quot;', &quot;</span>
+<span class="nc" id="L137">					+ &quot;drink_type = '&quot;+event.getDrinkType() + &quot;', &quot;</span>
+<span class="nc" id="L138">					+ &quot;entertainment = '&quot;+event.getEntertainment() + &quot;', &quot;</span>
+<span class="nc" id="L139">					+ &quot;status = '&quot;+event.getStatus()+&quot;' &quot;</span>
+<span class="nc" id="L140">					+ &quot;WHERE eventID = &quot;+event.getEventId();</span>
+<span class="nc" id="L141">			stmt.executeUpdate(insertEvent);	</span>
+<span class="nc" id="L142">			conn.commit(); </span>
+<span class="nc" id="L143">		} catch (SQLException e) {}</span>
+<span class="nc" id="L144">	}</span>
+	//Event search for caterer manager
+	public static ArrayList&lt;Event&gt;  listCatererEvents(String date, String time) {  
+<span class="nc" id="L147">			return ReturnMatchingEventsList(&quot;SELECT e.*, u.last_name, u.first_name, &quot; +</span>
+					&quot;c.last_name caterer_last_name, c.first_name caterer_first_name &quot; + 
+					&quot;from CATERING.EVENT e &quot; + 
+					&quot;INNER JOIN CATERING.SYSTEM_USER u ON e.username = u.username &quot; + 
+					&quot;LEFT JOIN CATERING.SYSTEM_USER c on e.caterer_username = c.username &quot; + 
+<span class="nc" id="L152">					&quot;WHERE date &gt;= STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') &quot; + </span>
+<span class="nc" id="L153">					&quot;AND start_time &gt;= '&quot;+time+&quot;' AND status = 'reserved' ORDER BY date, start_time&quot;);</span>
+			
+			
+	}
+	//Event search for caterer staff
+	public static ArrayList&lt;Event&gt;  listMyCatererEvents(String date, String time, String username) {  
+<span class="nc" id="L159">		return ReturnMatchingEventsList(&quot; SELECT e.*, u.last_name, u.first_name, &quot; +</span>
+					&quot;c.last_name caterer_last_name, c.first_name caterer_first_name &quot; +
+					&quot;from CATERING.EVENT e &quot; +
+					&quot;INNER JOIN CATERING.SYSTEM_USER u ON e.username = u.username &quot; 
+<span class="nc" id="L163">					+ &quot;LEFT JOIN CATERING.SYSTEM_USER c on e.caterer_username = c.username WHERE date &gt;= STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') &quot;</span>
+<span class="nc" id="L164">					+ &quot;AND start_time &gt;= '&quot;+time+&quot;' AND caterer_username = '&quot;+username+&quot;' AND status = 'reserved' ORDER BY date, start_time&quot;);</span>
+	}
+	//Search for Event by ID
+	public static Event  idSearch(int id) { 
+<span class="nc" id="L168">		ArrayList&lt;Event&gt; eventListInDB = ReturnMatchingEventsList(&quot; SELECT e.*, u.last_name, u.first_name, &quot; +</span>
+			&quot;c.last_name caterer_last_name, c.first_name caterer_first_name &quot; +
+			&quot;from CATERING.EVENT e &quot; +
+			&quot;INNER JOIN CATERING.SYSTEM_USER u ON e.username = u.username &quot; 
+<span class="nc" id="L172">			+ &quot;LEFT JOIN CATERING.SYSTEM_USER c on e.caterer_username = c.username WHERE eventID = &quot;+id );</span>
+<span class="nc" id="L173">		return eventListInDB.get(0);</span>
+	}
+	//Event search for user
+	public static ArrayList&lt;Event&gt;  listMyUserEvents(String date, String time, String username) { 
+<span class="nc" id="L177">		return ReturnMatchingEventsList(&quot; SELECT e.*, u.last_name, u.first_name, &quot; +</span>
+			&quot;c.last_name caterer_last_name, c.first_name caterer_first_name &quot; +
+			&quot;from CATERING.EVENT e &quot;+
+			&quot;INNER JOIN CATERING.SYSTEM_USER u on e.username = u.username &quot;
+<span class="nc" id="L181">			+ &quot;LEFT JOIN CATERING.SYSTEM_USER c on e.caterer_username = c.username WHERE date &gt;= STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') &quot;</span>
+<span class="nc" id="L182">			+ &quot;AND start_time &gt;= '&quot;+time+&quot;' AND e.username = '&quot;+username+&quot;' AND status = 'reserved' ORDER BY date, start_time&quot;);</span>
+}
+	//Assign catering staff (manager function)
+	public static void assignStaff(String last, String first, int eventId) {
+		
+<span class="nc" id="L187">		Statement stmt = null;</span>
+<span class="nc" id="L188">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L190">			stmt = conn.createStatement();</span>
+<span class="nc" id="L191">			String update = &quot;UPDATE CATERING.EVENT SET caterer_username = &quot; + </span>
+					&quot;(SELECT username from CATERING.SYSTEM_USER &quot; + 
+<span class="nc" id="L193">					&quot;WHERE last_name = '&quot;+last+&quot;' AND first_name = '&quot;+first+&quot;' AND role = 'Caterer Staff') &quot; + </span>
+<span class="nc" id="L194">					&quot;WHERE eventID = &quot;+eventId;</span>
+<span class="nc" id="L195">			stmt.executeUpdate(update);	</span>
+<span class="nc" id="L196">			conn.commit(); </span>
+<span class="nc" id="L197">		} catch (SQLException e) {}</span>
+<span class="nc" id="L198">	}</span>
+	
+	public static int getNewId() {
+<span class="nc" id="L201">		Statement stmt = null;</span>
+<span class="nc" id="L202">		int id = -2;</span>
+<span class="nc" id="L203">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L205">			stmt = conn.createStatement();</span>
+<span class="nc" id="L206">			String queryString = &quot;SELECT MAX(eventId) as max FROM CATERING.EVENT&quot;;</span>
+<span class="nc" id="L207">			ResultSet lastID = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">			while (lastID.next()) {</span>
+<span class="nc" id="L209">				id = lastID.getInt(&quot;max&quot;);</span>
+			}
+<span class="nc" id="L211">		} catch (SQLException e) {}</span>
+<span class="nc" id="L212">		return id+1;</span>
+	}
+	
+	public static void reserveEvent(int id) {
+<span class="nc" id="L216">		Statement stmt = null;</span>
+<span class="nc" id="L217">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L219">			stmt = conn.createStatement();</span>
+<span class="nc" id="L220">			String insertEvent = &quot;UPDATE CATERING.EVENT SET status = 'reserved' &quot;</span>
+<span class="nc" id="L221">					+ &quot;WHERE eventID = &quot;+id;</span>
+<span class="nc" id="L222">			stmt.executeUpdate(insertEvent);	</span>
+<span class="nc" id="L223">			conn.commit(); </span>
+<span class="nc" id="L224">		} catch (SQLException e) {}</span>
+<span class="nc" id="L225">	}</span>
+	
+	//determine if date is already has 2 bookings
+	public static int eventDateFull(String date, String user)  {  
+<span class="nc" id="L229">		Statement stmt = null;</span>
+<span class="nc" id="L230">		Connection conn = SQLConnection.getDBConnection(); </span>
+<span class="nc" id="L231">		int answer = 0;</span>
+		try {
+<span class="nc" id="L233">			stmt = conn.createStatement();</span>
+<span class="nc" id="L234">			String queryString = &quot;SELECT COUNT(*) FROM CATERING.EVENT WHERE STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') = date AND username = '&quot;+user+&quot;'&quot;;</span>
+		
+<span class="nc" id="L236">			ResultSet one = stmt.executeQuery(queryString);	</span>
+			
+<span class="nc bnc" id="L238" title="All 2 branches missed.">			while(one.next()) {</span>
+<span class="nc" id="L239">				answer = one.getInt(1);</span>
+			}
+<span class="nc" id="L241">		} catch (SQLException e) {System.out.println(e);}</span>
+<span class="nc" id="L242">		return answer;</span>
+	}
+	
+	//determine if week already has 5 bookings
+		public static int eventWeekFull(String date1, String date2, String user)  {  
+<span class="nc" id="L247">			Statement stmt = null;</span>
+<span class="nc" id="L248">			Connection conn = SQLConnection.getDBConnection();</span>
+<span class="nc" id="L249">			int answer = 0;</span>
+			
+			try {
+<span class="nc" id="L252">				stmt = conn.createStatement();</span>
+<span class="nc" id="L253">				String queryString = &quot;SELECT COUNT(*) FROM CATERING.EVENT WHERE STR_TO_DATE('&quot;+date1+&quot;', '%Y-%m-%d') &lt;= date AND STR_TO_DATE('&quot;+date2+&quot;', '%Y-%m-%d') &gt;= date AND username = '&quot;+user+&quot;'&quot;;</span>
+<span class="nc" id="L254">				ResultSet one = stmt.executeQuery(queryString);	</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">				while(one.next())</span>
+<span class="nc" id="L256">					answer = one.getInt(1);</span>
+	
+<span class="nc" id="L258">			} catch (SQLException e) {}</span>
+			
+<span class="nc" id="L260">			return answer;</span>
+		}
+	
+	//determine if hall booking overlaps
+	public static ArrayList&lt;Event&gt; hallConflict(String date, double time, double duration, String hall, int id) {
+<span class="nc" id="L265">		return ReturnMatchingEventsListNoNames(&quot;SELECT * FROM CATERING.EVENT WHERE STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') = date AND '&quot;+hall+&quot;' = hall AND eventID != &quot;+id);</span>
+			
+	}
+	
+	public static ArrayList&lt;Event&gt; hallConflict(String date, double time, double duration, String hall) {
+<span class="nc" id="L270">		    return ReturnMatchingEventsListNoNames(&quot;SELECT * FROM CATERING.EVENT WHERE STR_TO_DATE('&quot;+date+&quot;', '%Y-%m-%d') = date AND '&quot;+hall+&quot;' = hall &quot;);</span>
+	}
+	
+	public static int hallCapacity(String hall) {
+<span class="nc" id="L274">		Statement stmt = null;</span>
+<span class="nc" id="L275">		Connection conn = SQLConnection.getDBConnection(); </span>
+<span class="nc" id="L276">		int cap = 0;</span>
+		try {
+<span class="nc" id="L278">			stmt = conn.createStatement();</span>
+<span class="nc" id="L279">			String queryString = &quot;SELECT capacity FROM CATERING.HALL WHERE hall_name = '&quot;+hall+&quot;'&quot;;</span>
+<span class="nc" id="L280">			ResultSet capacity = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">			while (capacity.next()) {</span>
+<span class="nc" id="L282">				cap = capacity.getInt(&quot;capacity&quot;);</span>
+			}
+<span class="nc" id="L284">		} catch (SQLException e) {}</span>
+<span class="nc" id="L285">		return cap;</span>
+	}
+	
+	public static double mealCost(String meal) {
+<span class="nc" id="L289">		Statement stmt = null;</span>
+<span class="nc" id="L290">		double mealCost = 0;</span>
+<span class="nc" id="L291">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L293">			stmt = conn.createStatement();</span>
+<span class="nc" id="L294">			String queryString = &quot;SELECT cost FROM CATERING.MEAL_TYPE WHERE meal_name = '&quot;+meal+&quot;'&quot;;</span>
+<span class="nc" id="L295">			ResultSet capacity = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">			while (capacity.next()) {</span>
+<span class="nc" id="L297">				mealCost = capacity.getInt(&quot;cost&quot;);</span>
+			}
+<span class="nc" id="L299">		} catch (SQLException e) {}</span>
+<span class="nc" id="L300">		return mealCost;</span>
+	}
+	
+	public static boolean namesMatch(String last, String first) {
+<span class="fc" id="L304">		Statement stmt = null;</span>
+<span class="fc" id="L305">		Connection conn = SQLConnection.getDBConnection();  </span>
+<span class="fc" id="L306">		boolean answer = true;</span>
+		try {
+<span class="fc" id="L308">			stmt = conn.createStatement();</span>
+<span class="fc" id="L309">			String queryString = &quot;SELECT * FROM CATERING.SYSTEM_USER WHERE last_name = '&quot;+last+&quot;' AND first_name = '&quot;+first+&quot;'&quot;;</span>
+<span class="fc" id="L310">			ResultSet one = stmt.executeQuery(queryString);	</span>
+<span class="fc bfc" id="L311" title="All 2 branches covered.">			if (!one.next()) answer =  false;</span>
+			
+<span class="pc" id="L313">		} catch (SQLException e) {}</span>
+<span class="fc" id="L314">		return answer;</span>
+	}
+	
+	public static double formalMult(String formality) {
+<span class="nc" id="L318">		Statement stmt = null;</span>
+<span class="nc" id="L319">		double formal = 0;</span>
+<span class="nc" id="L320">		Connection conn = SQLConnection.getDBConnection(); </span>
+		try {
+<span class="nc" id="L322">			stmt = conn.createStatement();</span>
+<span class="nc" id="L323">			String queryString = &quot;SELECT multiplier FROM CATERING.MEAL_FORMALITY WHERE formality_name = '&quot;+formality+&quot;'&quot;;</span>
+<span class="nc" id="L324">			ResultSet capacity = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">			while (capacity.next()) {</span>
+<span class="nc" id="L326">				formal = capacity.getDouble(1);</span>
+			}
+<span class="nc" id="L328">		} catch (SQLException e) {}</span>
+<span class="nc" id="L329">		return formal;</span>
+	}
+	
+	public static double drinkCost(String drink_type) {
+<span class="nc" id="L333">		Statement stmt = null;</span>
+<span class="nc" id="L334">		double drinkCost = 0;</span>
+<span class="nc" id="L335">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L337">			stmt = conn.createStatement();</span>
+<span class="nc" id="L338">			String queryString = &quot;SELECT added_cost FROM CATERING.DRINK_TYPE WHERE drink_name = '&quot;+drink_type+&quot;'&quot;;</span>
+<span class="nc" id="L339">			ResultSet capacity = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">			while (capacity.next()) {</span>
+<span class="nc" id="L341">				drinkCost = capacity.getInt(&quot;added_cost&quot;);</span>
+			}
+<span class="nc" id="L343">		} catch (SQLException e) {}</span>
+<span class="nc" id="L344">		return drinkCost;</span>
+	}
+	//determine if name entered is a caterer in the system
+	public static Boolean isCaterer(String last, String first)  {  
+<span class="fc" id="L348">		Statement stmt = null;</span>
+<span class="fc" id="L349">		Connection conn = SQLConnection.getDBConnection();  </span>
+<span class="fc" id="L350">		boolean answer = true;</span>
+		try {
+<span class="fc" id="L352">			stmt = conn.createStatement();</span>
+<span class="fc" id="L353">			String queryString = &quot;SELECT * FROM CATERING.SYSTEM_USER WHERE last_name = '&quot;+last+&quot;' AND first_name = '&quot;+first+&quot;' AND role = 'Caterer Staff'&quot;;</span>
+<span class="fc" id="L354">			ResultSet one = stmt.executeQuery(queryString);	</span>
+<span class="fc bfc" id="L355" title="All 2 branches covered.">			if (!one.next()) answer =  false;</span>
+<span class="pc" id="L356">		} catch (SQLException e) {}</span>
+<span class="fc" id="L357">		return answer;</span>
+	}
+	
+	
+	
+	//determine if event name is already in the system
+		public static Boolean isUnique(String name, int id)  {  
+<span class="nc" id="L364">			Statement stmt = null;</span>
+<span class="nc" id="L365">			Connection conn = SQLConnection.getDBConnection(); </span>
+<span class="nc" id="L366">			boolean answer = false;</span>
+			try {
+<span class="nc" id="L368">				stmt = conn.createStatement();</span>
+<span class="nc" id="L369">				String queryString = &quot;SELECT * FROM CATERING.EVENT WHERE event_name = '&quot;+name+&quot;' AND eventID != &quot;+id;</span>
+<span class="nc" id="L370">				ResultSet one = stmt.executeQuery(queryString);	</span>
+<span class="nc bnc" id="L371" title="All 2 branches missed.">				if (!one.next()) answer = true;</span>
+				
+<span class="nc" id="L373">			} catch (SQLException e) {}</span>
+<span class="nc" id="L374">			return answer;</span>
+		}
+		
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CreditCard.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">CreditCard.java</span></div><h1>CreditCard.java</h1><pre class="source lang-java linenums">package Project.model;
+
+import java.io.Serializable;
+import Project.data.EventDAO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.time.*;
+
+<span class="fc" id="L11">public class CreditCard implements Serializable{</span>
+
+	private static final long serialVersionUID = 3L;
+	private String cardNo;
+	private String cardPin;
+	private String cardExp;
+		
+	public String getCardNo() {
+<span class="fc" id="L19">		return cardNo;</span>
+	}
+
+	public void setCardNo(String cardNo) {
+<span class="fc" id="L23">		this.cardNo = cardNo;</span>
+<span class="fc" id="L24">	}</span>
+
+	public String getCardPin() {
+<span class="fc" id="L27">		return cardPin;</span>
+	}
+
+	public void setCardPin(String cardPin) {
+<span class="fc" id="L31">		this.cardPin = cardPin;</span>
+<span class="fc" id="L32">	}</span>
+
+	public String getCardExp() {
+<span class="fc" id="L35">		return cardExp;</span>
+	}
+
+	public void setCardExp(String cardExp) {
+<span class="fc" id="L39">		this.cardExp = cardExp;</span>
+<span class="fc" id="L40">	}</span>
+	
+	public void setCard (String cardNo, String cardPin, String cardExp) {
+<span class="fc" id="L43">		setCardNo(cardNo);</span>
+<span class="fc" id="L44">		setCardPin(cardPin);</span>
+<span class="fc" id="L45">		setCardExp(cardExp);</span>
+<span class="fc" id="L46">	}</span>
+	
+	public void validateCard (CreditCard card, CardErrorMsgs errorMsgs) {
+<span class="fc" id="L49">		errorMsgs.setCardNumberError(validateCardNo(card.getCardNo()));</span>
+<span class="fc" id="L50">		errorMsgs.setCardPinError(validateCardPin(card.getCardPin()));</span>
+<span class="fc" id="L51">		errorMsgs.setCardExpError(validateCardExp(card.getCardExp()));</span>
+		
+<span class="fc" id="L53">		errorMsgs.setErrorMsg();</span>
+<span class="fc" id="L54">	}</span>
+
+	private String validateCardNo(String number) {
+<span class="fc" id="L57">		String result=&quot;&quot;;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		if(!isTextAnInteger(number)) </span>
+<span class="fc" id="L59">			result = &quot;Credit card number must be a number&quot;;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		else if(number.length() != 16)</span>
+<span class="fc" id="L61">			result = &quot;Credit card number must be 16 digits&quot;;</span>
+		
+<span class="fc" id="L63">		return result;</span>
+	}
+	
+	private String validateCardPin(String pin) {
+<span class="fc" id="L67">		String result=&quot;&quot;;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">		if(!isTextAnInteger(pin)) </span>
+<span class="fc" id="L69">			result = &quot;Credit card pin must be a number&quot;;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">		else if(pin.length() != 4)</span>
+<span class="fc" id="L71">			result = &quot;Credit card pin must be 4 digits&quot;;</span>
+		
+<span class="fc" id="L73">		return result;</span>
+	}
+	
+	private String validateCardExp(String exp) {
+<span class="fc" id="L77">		String result=&quot;&quot;;</span>
+<span class="fc" id="L78">		String current = new SimpleDateFormat(&quot;MMyy&quot;).format(Calendar.getInstance().getTime());</span>
+		
+<span class="fc bfc" id="L80" title="All 2 branches covered.">		if(!isTextAnInteger(exp)) </span>
+<span class="fc" id="L81">			result = &quot;Credit card exp date must be a number&quot;;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">		else if(exp.length() != 4)</span>
+<span class="fc" id="L83">			result = &quot;Credit card exp date must be 4 digits&quot;;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">		else if(exp.compareTo(current) &lt; 0)</span>
+<span class="fc" id="L85">			result = &quot;Credit card exp date must not be in the past&quot;;</span>
+		
+<span class="fc" id="L87">		return result;</span>
+	}
+
+//	This section is for general purpose methods used internally in this class
+	
+	
+	private boolean isTextAnInteger (String string) {
+        boolean result;
+		try
+        {
+<span class="fc" id="L97">            Long.parseLong(string);</span>
+<span class="fc" id="L98">            result=true;</span>
+<span class="fc" id="L99">        } </span>
+<span class="fc" id="L100">        catch (NumberFormatException e) </span>
+        {
+<span class="fc" id="L102">            result=false;</span>
+        }
+<span class="fc" id="L104">		return result;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

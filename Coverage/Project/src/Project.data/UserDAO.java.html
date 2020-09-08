@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserDAO.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.data</a> &gt; <span class="el_source">UserDAO.java</span></div><h1>UserDAO.java</h1><pre class="source lang-java linenums">package Project.data;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import Project.model.Event;
+import Project.model.User;
+import Project.util.SQLConnection;
+
+<span class="nc" id="L13">public class UserDAO {</span>
+
+<span class="fc" id="L15">	static SQLConnection DBMgr = SQLConnection.getInstance();</span>
+	
+	private static ArrayList&lt;User&gt; ReturnMatchingUsersList (String queryString) {
+<span class="nc" id="L18">		ArrayList&lt;User&gt; userListInDB = new ArrayList&lt;User&gt;();</span>
+		
+<span class="nc" id="L20">		Statement stmt = null;</span>
+<span class="nc" id="L21">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L23">			stmt = conn.createStatement();</span>
+<span class="nc" id="L24">			ResultSet userList = stmt.executeQuery(queryString);</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">			while (userList.next()) {</span>
+<span class="nc" id="L26">				User user=new User(); </span>
+<span class="nc" id="L27">				user.setLastname(userList.getString(&quot;last_name&quot;));</span>
+<span class="nc" id="L28">				user.setFirstname(userList.getString(&quot;first_name&quot;));</span>
+<span class="nc" id="L29">				user.setPhone(userList.getString(&quot;phone&quot;));</span>
+<span class="nc" id="L30">				user.setRole(userList.getString(&quot;role&quot;));</span>
+<span class="nc" id="L31">				user.setUsername(userList.getString(&quot;username&quot;));</span>
+<span class="nc" id="L32">				user.setPassword(userList.getString(&quot;password&quot;));</span>
+<span class="nc" id="L33">				user.setEmail(userList.getString(&quot;email&quot;));</span>
+<span class="nc" id="L34">				user.setUtaId(userList.getString(&quot;UTA_ID&quot;));</span>
+<span class="nc" id="L35">				user.setStreetName(userList.getString(&quot;street_name&quot;));</span>
+<span class="nc" id="L36">				user.setStreetNumber(userList.getString(&quot;street_number&quot;));</span>
+<span class="nc" id="L37">				user.setCity(userList.getString(&quot;city&quot;));</span>
+<span class="nc" id="L38">				user.setState(userList.getString(&quot;state&quot;));</span>
+<span class="nc" id="L39">				user.setZipcode(userList.getString(&quot;zipcode&quot;));</span>
+<span class="nc" id="L40">				userListInDB.add(user);	</span>
+			}
+<span class="nc" id="L42">		} catch (SQLException e) {</span>
+<span class="nc" id="L43">			System.out.println(e);</span>
+		}
+<span class="nc" id="L45">		return userListInDB;</span>
+	}
+	
+	public static ArrayList&lt;User&gt;   searchUserwithLastname (String lastname)  {
+<span class="nc" id="L49">		return ReturnMatchingUsersList(&quot;SELECT * from catering.system_user WHERE last_name LIKE '%&quot;+lastname+&quot;%' ORDER BY last_name, first_name, role&quot;);</span>
+}
+	
+	public static ArrayList&lt;User&gt;   allUsers ()  {
+<span class="nc" id="L53">		return ReturnMatchingUsersList(&quot;SELECT * from catering.system_user  ORDER BY last_name, first_name, role&quot;);</span>
+}
+//search specific user
+public static ArrayList&lt;User&gt;   searchUser (String username)  {  
+<span class="nc" id="L57">	return ReturnMatchingUsersList(&quot;SELECT * from catering.system_user WHERE username='&quot;+username+&quot;' ORDER BY last_name, first_name&quot;);</span>
+}
+public static boolean deleteUser(String utaid) {
+
+<span class="nc" id="L61">	Statement stmt = null;</span>
+<span class="nc" id="L62">	Connection conn = SQLConnection.getDBConnection();  </span>
+	try {
+<span class="nc" id="L64">		stmt = conn.createStatement();</span>
+<span class="nc" id="L65">		stmt.executeUpdate(&quot;delete from catering.system_user where UTA_ID='&quot;+utaid+&quot;'&quot;);</span>
+<span class="nc" id="L66">		conn.commit();</span>
+<span class="nc" id="L67">		}</span>
+<span class="nc" id="L68">	catch (SQLException e) {</span>
+<span class="nc" id="L69">		System.out.println(e);</span>
+	}
+	
+<span class="nc" id="L72">	return true;}</span>
+//search USER
+public static User searchUserwithUname(String uname) {
+<span class="nc" id="L75">	User user=new User();</span>
+<span class="nc" id="L76">	Statement stmt = null;</span>
+<span class="nc" id="L77">	Connection conn = SQLConnection.getDBConnection();  </span>
+	try {
+		
+<span class="nc" id="L80">		stmt = conn.createStatement();</span>
+<span class="nc" id="L81">		ResultSet companyList = stmt.executeQuery(&quot;select * from catering.system_user where username='&quot;+uname+&quot;'&quot;);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		while (companyList.next()) {</span>
+<span class="nc" id="L83">			user.setLastname(companyList.getString(&quot;last_name&quot;));</span>
+<span class="nc" id="L84">			user.setFirstname(companyList.getString(&quot;first_name&quot;));</span>
+<span class="nc" id="L85">			user.setPhone(companyList.getString(&quot;phone&quot;));</span>
+<span class="nc" id="L86">			user.setRole(companyList.getString(&quot;role&quot;));</span>
+<span class="nc" id="L87">			user.setUsername(companyList.getString(&quot;username&quot;));</span>
+<span class="nc" id="L88">			user.setPassword(companyList.getString(&quot;password&quot;));</span>
+<span class="nc" id="L89">			user.setEmail(companyList.getString(&quot;email&quot;));</span>
+<span class="nc" id="L90">			user.setUtaId(companyList.getString(&quot;UTA_ID&quot;));</span>
+<span class="nc" id="L91">			user.setStreetName(companyList.getString(&quot;street_name&quot;));</span>
+<span class="nc" id="L92">			user.setStreetNumber(companyList.getString(&quot;street_number&quot;));</span>
+<span class="nc" id="L93">			user.setCity(companyList.getString(&quot;city&quot;));</span>
+<span class="nc" id="L94">			user.setState(companyList.getString(&quot;state&quot;));</span>
+<span class="nc" id="L95">			user.setZipcode(companyList.getString(&quot;zipcode&quot;));	</span>
+		}
+<span class="nc" id="L97">	} catch (SQLException e) {</span>
+<span class="nc" id="L98">		System.out.println(e);</span>
+	}
+
+	
+<span class="nc" id="L102">	return user;}</span>
+
+
+public static void modifyUser(User user) {
+<span class="nc" id="L106">	Statement stmt = null;</span>
+<span class="nc" id="L107">	Connection conn = SQLConnection.getDBConnection();  </span>
+	try {
+<span class="nc" id="L109">		stmt = conn.createStatement();</span>
+<span class="nc" id="L110">		stmt.executeUpdate(&quot;UPDATE catering.system_user SET first_name='&quot;+user.getFirstname()+&quot;',last_name='&quot;+user.getLastname()+&quot;',password='&quot;+user.getPassword()+&quot;',role='&quot;+user.getRole()+&quot;',UTA_ID='&quot;+user.getUtaId()+&quot;',phone='&quot;+user.getPhone()+&quot;',email='&quot;+user.getEmail()+&quot;',street_number='&quot;+user.getStreetNumber()+&quot;',street_name='&quot;+user.getStreetName()+&quot;',city='&quot;+user.getCity()+&quot;',state='&quot;+user.getState()+&quot;',zipcode='&quot;+user.getZipcode()+&quot;' WHERE username='&quot;+user.getUsername()+&quot;'&quot;);</span>
+<span class="nc" id="L111">		conn.commit(); 			</span>
+<span class="nc" id="L112">	}</span>
+<span class="nc" id="L113">	catch (SQLException e) {</span>
+<span class="nc" id="L114">		System.out.println(e);</span>
+	}
+<span class="nc" id="L116">}</span>
+
+public static void modifyUsername(User user, String username) {
+<span class="nc" id="L119">	Statement stmt = null;</span>
+<span class="nc" id="L120">	Connection conn = SQLConnection.getDBConnection();  </span>
+	try {
+<span class="nc" id="L122">		stmt = conn.createStatement();</span>
+<span class="nc" id="L123">		stmt.executeUpdate(&quot;UPDATE catering.system_user SET username = '&quot;+user.getUsername()+&quot;', first_name='&quot;+user.getFirstname()+&quot;',last_name='&quot;+user.getLastname()+&quot;',password='&quot;+user.getPassword()+&quot;',role='&quot;+user.getRole()+&quot;',UTA_ID='&quot;+user.getUtaId()+&quot;',phone='&quot;+user.getPhone()+&quot;',email='&quot;+user.getEmail()+&quot;',street_number='&quot;+user.getStreetNumber()+&quot;',street_name='&quot;+user.getStreetName()+&quot;',city='&quot;+user.getCity()+&quot;',state='&quot;+user.getState()+&quot;',zipcode='&quot;+user.getZipcode()+&quot;' WHERE username='&quot;+user.getUsername()+&quot;'&quot;);</span>
+<span class="nc" id="L124">		conn.commit(); 	</span>
+			
+<span class="nc" id="L126">	}</span>
+<span class="nc" id="L127">	catch (SQLException e) {</span>
+<span class="nc" id="L128">		System.out.println(e);</span>
+	}
+<span class="nc" id="L130">}</span>
+
+
+
+
+	
+	public static void insertUser (User user) {
+<span class="nc" id="L137">		Statement stmt = null;</span>
+<span class="nc" id="L138">		Connection conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L140">			stmt = conn.createStatement();</span>
+<span class="nc" id="L141">			String insertUser = &quot;INSERT INTO CATERING.SYSTEM_USER VALUES ('&quot;  </span>
+<span class="nc" id="L142">					+ user.getUsername()  + &quot;','&quot;</span>
+<span class="nc" id="L143">					+ user.getPassword() + &quot;','&quot;		</span>
+<span class="nc" id="L144">					+ user.getLastname() +&quot;','&quot;</span>
+<span class="nc" id="L145">					+ user.getFirstname() + &quot;','&quot;</span>
+<span class="nc" id="L146">					+ user.getRole()+ &quot;','&quot;</span>
+<span class="nc" id="L147">					+ user.getUtaId() + &quot;','&quot;</span>
+<span class="nc" id="L148">					+ user.getPhone() + &quot;','&quot;</span>
+<span class="nc" id="L149">					+ user.getEmail() + &quot;','&quot;</span>
+<span class="nc" id="L150">					+ user.getStreetNumber() + &quot;','&quot;</span>
+<span class="nc" id="L151">					+ user.getStreetName() + &quot;','&quot;</span>
+<span class="nc" id="L152">					+ user.getCity() + &quot;','&quot;</span>
+<span class="nc" id="L153">					+ user.getState() + &quot;','&quot;</span>
+<span class="nc" id="L154">					+ user.getZipcode() + &quot;')&quot;;</span>
+<span class="nc" id="L155">			stmt.executeUpdate(insertUser);	</span>
+<span class="nc" id="L156">			conn.commit(); </span>
+<span class="nc" id="L157">		} catch (SQLException e) {}</span>
+<span class="nc" id="L158">	}</span>
+	
+	//unique role
+	public static Boolean duplicateRole(String role) {  
+<span class="fc" id="L162">		Statement stmt = null;   </span>
+<span class="fc" id="L163">		Connection conn = null;  </span>
+<span class="fc" id="L164">		conn = SQLConnection.getDBConnection(); </span>
+<span class="fc" id="L165">		boolean answer = true;</span>
+<span class="fc" id="L166">		ArrayList&lt;User&gt; userListInDB = new ArrayList&lt;User&gt;();</span>
+		try {
+<span class="fc" id="L168">			stmt = conn.createStatement();</span>
+<span class="fc" id="L169">			String searchUser = &quot; SELECT * from CATERING.SYSTEM_USER WHERE role = '&quot;+role+&quot;'&quot;;</span>
+<span class="fc" id="L170">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">			if (!userList.next()) {</span>
+<span class="fc" id="L172">				answer =  false;</span>
+			}
+			 
+<span class="pc" id="L175">		} catch (SQLException e) {}  </span>
+<span class="fc" id="L176">		return answer;</span>
+	}
+	
+	public static Boolean duplicateId(String id) {  
+<span class="fc" id="L180">		Statement stmt = null;   </span>
+<span class="fc" id="L181">		Connection conn = null;  </span>
+<span class="fc" id="L182">		boolean answer = true;</span>
+<span class="fc" id="L183">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="fc" id="L185">			stmt = conn.createStatement();</span>
+<span class="fc" id="L186">			String searchUser = &quot; SELECT * from CATERING.SYSTEM_USER WHERE UTA_ID = '&quot;+id+&quot;'&quot;;</span>
+<span class="fc" id="L187">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">			if (!userList.next()) answer = false;</span>
+			 
+<span class="pc" id="L190">		} catch (SQLException e) {}  </span>
+<span class="fc" id="L191">		return answer;</span>
+	}
+	
+	public static Boolean duplicateUser(String username) {  
+<span class="fc" id="L195">		Statement stmt = null;   </span>
+<span class="fc" id="L196">		Connection conn = null;  </span>
+<span class="fc" id="L197">		boolean answer = true;</span>
+<span class="fc" id="L198">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="fc" id="L200">			stmt = conn.createStatement();</span>
+<span class="fc" id="L201">			String searchUser = &quot; SELECT * from CATERING.SYSTEM_USER WHERE username = '&quot;+username+&quot;'&quot;;</span>
+<span class="fc" id="L202">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">			if (!userList.next()) answer = false;</span>
+			 
+<span class="pc" id="L205">		} catch (SQLException e) {}  </span>
+<span class="fc" id="L206">		return answer;</span>
+	}
+	
+
+	public static Boolean passwordMatch(String username, String password) {  
+<span class="fc" id="L211">		Statement stmt = null;   </span>
+<span class="fc" id="L212">		Connection conn = null;  </span>
+<span class="fc" id="L213">		boolean answer = true;</span>
+<span class="fc" id="L214">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="fc" id="L216">			stmt = conn.createStatement();</span>
+<span class="fc" id="L217">			String searchUser = &quot; SELECT * from CATERING.SYSTEM_USER WHERE username = '&quot;+username+&quot;' AND password = '&quot;+password+&quot;'&quot;;</span>
+<span class="fc" id="L218">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">			if (!userList.next()) answer = false;</span>
+			 
+<span class="pc" id="L221">		} catch (SQLException e) {}  </span>
+<span class="fc" id="L222">		return answer;</span>
+	}
+	
+	public static String getRole(String username) {
+<span class="nc" id="L226">		Statement stmt = null;   </span>
+<span class="nc" id="L227">		Connection conn = null; </span>
+<span class="nc" id="L228">		String role = &quot;&quot;;</span>
+<span class="nc" id="L229">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L231">			stmt = conn.createStatement();</span>
+<span class="nc" id="L232">			String searchUser = &quot; SELECT role from CATERING.SYSTEM_USER WHERE username = '&quot;+username+&quot;'&quot;;</span>
+<span class="nc" id="L233">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">			while (userList.next()) {</span>
+<span class="nc" id="L235">				role = userList.getString(&quot;role&quot;);</span>
+			}
+<span class="nc" id="L237">		} catch (SQLException e) {}  </span>
+<span class="nc" id="L238">		return role;</span>
+	}
+	
+	public static String getFirst(String username) {
+<span class="nc" id="L242">		Statement stmt = null;   </span>
+<span class="nc" id="L243">		Connection conn = null; </span>
+<span class="nc" id="L244">		String first = &quot;&quot;;</span>
+<span class="nc" id="L245">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L247">			stmt = conn.createStatement();</span>
+<span class="nc" id="L248">			String searchUser = &quot; SELECT first_name from CATERING.SYSTEM_USER WHERE username = '&quot;+username+&quot;'&quot;;</span>
+<span class="nc" id="L249">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">			while (userList.next()) {</span>
+<span class="nc" id="L251">				first = userList.getString(&quot;first_name&quot;);</span>
+			}
+<span class="nc" id="L253">		} catch (SQLException e) {}  </span>
+<span class="nc" id="L254">		return first;</span>
+	}
+	
+	public static String getLast(String username) {
+<span class="nc" id="L258">		Statement stmt = null;   </span>
+<span class="nc" id="L259">		Connection conn = null; </span>
+<span class="nc" id="L260">		String last = &quot;&quot;;</span>
+<span class="nc" id="L261">		conn = SQLConnection.getDBConnection();  </span>
+		try {
+<span class="nc" id="L263">			stmt = conn.createStatement();</span>
+<span class="nc" id="L264">			String searchUser = &quot; SELECT last_name from CATERING.SYSTEM_USER WHERE username = '&quot;+username+&quot;'&quot;;</span>
+<span class="nc" id="L265">			ResultSet userList = stmt.executeQuery(searchUser);</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">			while (userList.next()) {</span>
+<span class="nc" id="L267">				last = userList.getString(&quot;last_name&quot;);</span>
+			}
+<span class="nc" id="L269">		} catch (SQLException e) {}  </span>
+<span class="nc" id="L270">		return last;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

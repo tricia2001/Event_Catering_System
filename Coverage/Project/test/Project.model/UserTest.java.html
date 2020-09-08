@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">UserTest.java</span></div><h1>UserTest.java</h1><pre class="source lang-java linenums">package Project.model;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import junitparams.FileParameters;
+import junitparams.JUnitParamsRunner;
+
+@RunWith(JUnitParamsRunner.class)
+<span class="fc" id="L12">public class UserTest {</span>
+	
+	User user;
+	UserErrorMsgs Uerrors;
+
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L19">		user = new User();</span>
+<span class="fc" id="L20">		Uerrors = new UserErrorMsgs();</span>
+<span class="fc" id="L21">	}</span>
+
+	@Test
+	@FileParameters(&quot;test/Project/model/User_test_cases.csv&quot;)
+	public void test(int testcase, String action, String username,
+			String userLast, String userFirst, String role, String Password,
+			String UtaID, String phoneNum, String Email,
+			String streetNumber, String streetName, String city, String state, String zipCode,
+			String errorMsg, String UsernameError, String LastError, String FirstError,
+			String PasswordError, String RoleError, String UtaIdError, String EmailError,
+			String PhoneError, String StreetNoError, String StreetNameError, String CityError,
+			String StateError, String ZipError) {
+		
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if (userLast.equals(&quot;NULL&quot;)) { //don't set user last nmae</span>
+<span class="fc" id="L35">			user.setUsername(username);		</span>
+<span class="fc" id="L36">			user.setFirstname(userFirst);</span>
+<span class="fc" id="L37">			user.setRole(role);</span>
+<span class="fc" id="L38">			user.setPassword(Password);</span>
+<span class="fc" id="L39">			user.setUtaId(UtaID);</span>
+<span class="fc" id="L40">			user.setPhone(phoneNum);</span>
+<span class="fc" id="L41">			user.setEmail(Email);</span>
+<span class="fc" id="L42">			user.setStreetName(streetName);</span>
+<span class="fc" id="L43">			user.setStreetNumber(streetNumber);</span>
+<span class="fc" id="L44">			user.setCity(city);</span>
+<span class="fc" id="L45">			user.setState(state);</span>
+<span class="fc" id="L46">			user.setZipcode(zipCode);</span>
+<span class="fc" id="L47">		}</span>
+		
+		else {
+<span class="fc" id="L50">			user.setUser(username, Password, userLast, userFirst, role, UtaID, phoneNum,</span>
+<span class="fc" id="L51">				Email, streetNumber, streetName, city, state, zipCode);</span>
+		}
+		
+<span class="fc" id="L54">		user.validateUser(action, user, Uerrors);</span>
+	/*	if (testcase == 75) {
+		System.out.println(&quot;test case &quot;+testcase);
+		System.out.println(&quot;errorMsg = &quot;+Uerrors.getErrorMsg());
+		System.out.println(&quot;UsernameError = &quot;+Uerrors.getUsernameError());
+		System.out.println(&quot;PasswordError = &quot;+Uerrors.getPasswordError());
+		System.out.println(&quot;RoleError = &quot;+Uerrors.getRoleError());
+		System.out.println(&quot;PhoneError = &quot;+Uerrors.getPhoneError());
+		System.out.println(&quot;StreetNoError = &quot;+Uerrors.getStreetNoError());
+		System.out.println(&quot;StreetNameError = &quot;+Uerrors.getStreetNameError());
+		System.out.println(&quot;CityError = &quot;+Uerrors.getCityError());
+		System.out.println(&quot;StateError = &quot;+Uerrors.getStateError());
+		System.out.println(&quot;ZipError = &quot;+Uerrors.getZipError());
+		System.out.println(&quot;LastError = &quot;+Uerrors.getLastError());
+		System.out.println(&quot;FirstError = &quot;+Uerrors.getFirstError());
+		System.out.println(&quot;UtaIdError = &quot;+Uerrors.getUtaIdError());
+		System.out.println(&quot;EmailError = &quot;+Uerrors.getEmailError());
+		}*/
+<span class="fc" id="L72">		assertTrue(errorMsg.equals(Uerrors.getErrorMsg()));</span>
+<span class="fc" id="L73">		assertTrue(UsernameError.equals(Uerrors.getUsernameError()));</span>
+<span class="fc" id="L74">		assertTrue(PasswordError.equals(Uerrors.getPasswordError()));</span>
+<span class="fc" id="L75">		assertTrue(RoleError.equals(Uerrors.getRoleError()));</span>
+<span class="fc" id="L76">		assertTrue(PhoneError.equals(Uerrors.getPhoneError()));</span>
+<span class="fc" id="L77">		assertTrue(StreetNoError.equals(Uerrors.getStreetNoError()));</span>
+<span class="fc" id="L78">		assertTrue(StreetNameError.equals(Uerrors.getStreetNameError()));</span>
+<span class="fc" id="L79">		assertTrue(CityError.equals(Uerrors.getCityError()));</span>
+<span class="fc" id="L80">		assertTrue(StateError.equals(Uerrors.getStateError()));</span>
+<span class="fc" id="L81">		assertTrue(ZipError.equals(Uerrors.getZipError()));</span>
+<span class="fc" id="L82">		assertTrue(LastError.equals(Uerrors.getLastError()));</span>
+<span class="fc" id="L83">		assertTrue(FirstError.equals(Uerrors.getFirstError()));</span>
+<span class="fc" id="L84">		assertTrue(UtaIdError.equals(Uerrors.getUtaIdError()));</span>
+<span class="fc" id="L85">		assertTrue(EmailError.equals(Uerrors.getEmailError()));</span>
+<span class="fc" id="L86">		assertTrue(username.equals(user.getUsername()));</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">		if (!(userLast.equals(&quot;NULL&quot;)))</span>
+<span class="fc" id="L88">			assertTrue(userLast.equals(user.getLastname()));</span>
+<span class="fc" id="L89">		assertTrue(role.equals(user.getRole()));</span>
+<span class="fc" id="L90">		assertTrue(Password.equals(user.getPassword()));</span>
+<span class="fc" id="L91">		assertTrue(UtaID.equals(user.getUtaId()));</span>
+<span class="fc" id="L92">		assertTrue(phoneNum.equals(user.getPhone()));</span>
+<span class="fc" id="L93">		assertTrue(Email.equals(user.getEmail()));</span>
+<span class="fc" id="L94">		assertTrue(streetName.equals(user.getStreetName()));</span>
+<span class="fc" id="L95">		assertTrue(streetNumber.equals(user.getStreetNumber()));</span>
+<span class="fc" id="L96">		assertTrue(city.equals(user.getCity()));</span>
+<span class="fc" id="L97">		assertTrue(state.equals(user.getState()));</span>
+<span class="fc" id="L98">		assertTrue(zipCode.equals(user.getZipcode()));</span>
+<span class="fc" id="L99">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

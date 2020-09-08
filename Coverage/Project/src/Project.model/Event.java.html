@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Event.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">Event.java</span></div><h1>Event.java</h1><pre class="source lang-java linenums">package Project.model;
+
+import java.io.Serializable;
+import Project.data.EventDAO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.time.*;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.sql.Date;
+
+<span class="fc" id="L16">public class Event implements Serializable{</span>
+
+	private static final long serialVersionUID = 3L;
+	private int eventId;
+	private String username;
+	private String userLast;
+	private String userFirst;
+	private String date;
+	private String time;
+	private String duration;
+	private String hall;
+	private String attendees;
+	private String eventName;
+	private String foodType;
+	private String meal;
+	private String formality;
+	private String drinkType;
+	private String entertainment;
+	private String status;
+	private String catererUsername;
+	private String catererLast;
+	private String catererFirst;
+	private String estimatedCost;
+	
+
+	public void setEvent (int id, String user, String userLast, String userFirst, String date, String time, String duration, String hall, String attendees, 
+			String eventName, String foodType, String meal, String formality, String drinkType, String entertainment, String status) {
+<span class="fc" id="L43">		setEventId(id);</span>
+<span class="fc" id="L44">		setUsername(user);</span>
+<span class="fc" id="L45">		setUserLast(userLast);</span>
+<span class="fc" id="L46">		setUserFirst(userFirst);</span>
+<span class="fc" id="L47">		setDate(date);</span>
+<span class="fc" id="L48">		setTime(time);</span>
+<span class="fc" id="L49">		setDuration(duration);</span>
+<span class="fc" id="L50">		setHall(hall);</span>
+<span class="fc" id="L51">		setAttendees(attendees);</span>
+<span class="fc" id="L52">		setEventName(eventName);</span>
+<span class="fc" id="L53">		setFoodType(foodType);</span>
+<span class="fc" id="L54">		setMeal(meal);</span>
+<span class="fc" id="L55">		setFormality(formality);</span>
+<span class="fc" id="L56">		setDrinkType(drinkType);</span>
+<span class="fc" id="L57">		setEntertainment(entertainment);</span>
+<span class="fc" id="L58">		setStatus(status);</span>
+<span class="fc" id="L59">	}</span>
+	
+	public int getEventId() {
+<span class="nc" id="L62">		return eventId;</span>
+	}
+
+	public void setEventId(int eventId) {
+<span class="fc" id="L66">		this.eventId = eventId;</span>
+<span class="fc" id="L67">	}</span>
+
+	public String getUsername() {
+<span class="fc" id="L70">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="fc" id="L74">		this.username = username;</span>
+<span class="fc" id="L75">	}</span>
+
+	public String getDate() {
+<span class="fc" id="L78">		return date;</span>
+	}
+
+	public void setDate(String date) {
+<span class="fc" id="L82">		this.date = date;</span>
+<span class="fc" id="L83">	}</span>
+
+	public String getTime() {
+<span class="fc" id="L86">		return time;</span>
+	}
+
+	public void setTime(String time) {
+<span class="fc" id="L90">		this.time = time;</span>
+<span class="fc" id="L91">	}</span>
+
+	public String getDuration() {
+<span class="fc" id="L94">		return duration;</span>
+	}
+
+	public void setDuration(String duration) {
+<span class="fc" id="L98">		this.duration = duration;</span>
+<span class="fc" id="L99">	}</span>
+
+	public String getHall() {
+<span class="fc" id="L102">		return hall;</span>
+	}
+
+	public void setHall(String hall) {
+<span class="fc" id="L106">		this.hall = hall;</span>
+<span class="fc" id="L107">	}</span>
+
+	public String getAttendees() {
+<span class="nc" id="L110">		return attendees;</span>
+	}
+
+	public void setAttendees(String attendees) {
+<span class="fc" id="L114">		this.attendees = attendees;</span>
+<span class="fc" id="L115">	}</span>
+
+	public String getEventName() {
+<span class="nc" id="L118">		return eventName;</span>
+	}
+
+	public void setEventName(String eventName) {
+<span class="fc" id="L122">		this.eventName = eventName;</span>
+<span class="fc" id="L123">	}</span>
+
+	public String getFoodType() {
+<span class="fc" id="L126">		return foodType;</span>
+	}
+
+	public void setFoodType(String foodType) {
+<span class="fc" id="L130">		this.foodType = foodType;</span>
+<span class="fc" id="L131">	}</span>
+
+	public String getMeal() {
+<span class="nc" id="L134">		return meal;</span>
+	}
+
+	public void setMeal(String meal) {
+<span class="fc" id="L138">		this.meal = meal;</span>
+<span class="fc" id="L139">	}</span>
+
+	public String getFormality() {
+<span class="nc" id="L142">		return formality;</span>
+	}
+
+	public void setFormality(String formality) {
+<span class="fc" id="L146">		this.formality = formality;</span>
+<span class="fc" id="L147">	}</span>
+
+	public String getDrinkType() {
+<span class="nc" id="L150">		return drinkType;</span>
+	}
+
+	public void setDrinkType(String drinkType) {
+<span class="fc" id="L154">		this.drinkType = drinkType;</span>
+<span class="fc" id="L155">	}</span>
+
+	public String getEntertainment() {
+<span class="nc" id="L158">		return entertainment;</span>
+	}
+
+	public void setEntertainment(String entertainment) {
+<span class="fc" id="L162">		this.entertainment = entertainment;</span>
+<span class="fc" id="L163">	}</span>
+
+	public String getStatus() {
+<span class="fc" id="L166">		return status;</span>
+	}
+
+	public void setStatus(String status) {
+<span class="fc" id="L170">		this.status = status;</span>
+<span class="fc" id="L171">	}</span>
+	public String getCatererUsername() {
+<span class="fc" id="L173">		return catererUsername;</span>
+	}
+
+	public void setCatererUsername(String catererUsername) {
+<span class="fc" id="L177">		this.catererUsername = catererUsername;</span>
+<span class="fc" id="L178">	}</span>
+
+	public String getEstimatedCost() {
+<span class="nc" id="L181">		return estimatedCost;</span>
+	}
+
+	public void setEstimatedCost(String estimatedCost) {
+<span class="nc" id="L185">		this.estimatedCost = estimatedCost;</span>
+<span class="nc" id="L186">	}</span>
+	public String getUserLast() {
+<span class="fc" id="L188">		return userLast;</span>
+	}
+
+	public void setUserLast(String userLast) {
+<span class="fc" id="L192">		this.userLast = userLast;</span>
+<span class="fc" id="L193">	}</span>
+
+	public String getUserFirst() {
+<span class="fc" id="L196">		return userFirst;</span>
+	}
+
+	public void setUserFirst(String userFirst) {
+<span class="fc" id="L200">		this.userFirst = userFirst;</span>
+<span class="fc" id="L201">	}</span>
+
+	public String getCatererLast() {
+<span class="fc" id="L204">		return catererLast;</span>
+	}
+
+	public void setCatererLast(String catererLast) {
+<span class="fc" id="L208">		this.catererLast = catererLast;</span>
+<span class="fc" id="L209">	}</span>
+
+	public String getCatererFirst() {
+<span class="fc" id="L212">		return catererFirst;</span>
+	}
+
+	public void setCatererFirst(String catererFirst) {
+<span class="fc" id="L216">		this.catererFirst = catererFirst;</span>
+<span class="fc" id="L217">	}</span>
+//
+//  NOTE: 	The following code is not representative of how this would be coded in an industrial application.
+//			We are using this code to maximize the ability of Pit to mutate the code to determine how
+//			good the developed test cases are. This course is using this Java backend code as an application
+//			of the principles learned in CSE 5321 only.
+//	
+	
+	public void validateEvent (String action, Event event, EventErrorMsgs errorMsgs) {
+<span class="fc bfc" id="L226" title="All 2 branches covered.">		if (action.equals(&quot;newEvent&quot;)) {</span>
+<span class="nc" id="L227">			errorMsgs.setEventDateError(validateEventDate(event.getDate(), event.getTime()));</span>
+<span class="nc" id="L228">			errorMsgs.setEventTimeError(validateEventTime(event.getDate(), event.getTime()));</span>
+<span class="nc" id="L229">		}</span>
+<span class="fc bfc" id="L230" title="All 2 branches covered.">		else if (action.equals(&quot;saveEvent&quot;)) {</span>
+<span class="nc" id="L231">			errorMsgs.setDurationError(validateDuration(event.getDate(), event.getTime(), event.getDuration(), event.getHall()));</span>
+<span class="nc" id="L232">			errorMsgs.setAttendeeError(validateAttendees(event.getHall(), event.getAttendees()));</span>
+<span class="nc" id="L233">			errorMsgs.setEventNameError(validateEventName(event.getEventName(), event.getEventId()));</span>
+<span class="nc" id="L234">		}</span>
+<span class="fc bfc" id="L235" title="All 2 branches covered.">		else if (action.equals(&quot;reserveE&quot;)) {</span>
+<span class="nc" id="L236">			errorMsgs.setDurationError(validateDuration(event.getDate(), event.getTime(), event.getDuration(), event.getHall()));</span>
+<span class="nc" id="L237">			errorMsgs.setAttendeeError(validateAttendees(event.getHall(), event.getAttendees()));</span>
+<span class="nc" id="L238">			errorMsgs.setEventNameError(validateEventName(event.getEventName(), event.getEventId()));</span>
+			
+<span class="nc" id="L240">			errorMsgs.setErrorMsg();</span>
+			
+<span class="nc bnc" id="L242" title="All 2 branches missed.">			if (errorMsgs.getErrorMsg().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L243">				double capacity = EventDAO.hallCapacity(event.getHall());</span>
+<span class="nc" id="L244">				double mealCost = EventDAO.mealCost(event.getMeal());</span>
+<span class="nc" id="L245">				double attendees = Double.parseDouble(event.getAttendees());</span>
+<span class="nc" id="L246">				double duration = Double.parseDouble(event.getDuration());</span>
+<span class="nc" id="L247">				double formality = EventDAO.formalMult(event.getFormality());</span>
+<span class="nc" id="L248">				double drinkCost = EventDAO.drinkCost(event.getDrinkType());</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">				double music = (event.getEntertainment().equals(&quot;music&quot;)?50:0);</span>
+				
+<span class="nc" id="L251">				double cost = 2*duration*capacity</span>
+<span class="nc" id="L252">						+mealCost*attendees*formality</span>
+<span class="nc" id="L253">						+drinkCost*attendees + music;</span>
+<span class="nc" id="L254">				event.setEstimatedCost(&quot;$&quot;+Double.toString(cost));</span>
+			}
+<span class="nc" id="L256">		}</span>
+<span class="fc bfc" id="L257" title="All 4 branches covered.">		else if (action.equals(&quot;modifyE&quot;) || action.equals(&quot;modifyUserE&quot;)) {</span>
+<span class="fc" id="L258">			errorMsgs.setUserNamesError(validateUserNames(event.getUserLast(), event.getUserFirst()));</span>
+<span class="nc" id="L259">			errorMsgs.setEventDateError(validateEventDateReserve(event.getDate(), event.getTime(),event.getUsername()));</span>
+<span class="nc" id="L260">			errorMsgs.setEventTimeError(validateEventTime(event.getDate(), event.getTime()));</span>
+<span class="nc" id="L261">			errorMsgs.setDurationError(validateDurationUpdate(event.getDate(), event.getTime(), event.getDuration(), event.getHall(), event.getEventId()));</span>
+<span class="nc" id="L262">			errorMsgs.setAttendeeError(validateAttendees(event.getHall(), event.getAttendees()));</span>
+<span class="nc" id="L263">			errorMsgs.setEventNameError(validateEventName(event.getEventName(), event.getEventId()));</span>
+		
+			
+<span class="nc" id="L266">		}</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">		else if (action.equals(&quot;assignCaterer&quot;)) {</span>
+<span class="fc" id="L268">			errorMsgs.setCatererError(validateCaterer(event.getDate(), event.getTime(), event.getDuration(), event.getCatererLast(), event.getCatererFirst()));</span>
+<span class="fc" id="L269">		}</span>
+<span class="pc bpc" id="L270" title="1 of 8 branches missed.">		else if (action.equals(&quot;searchEvent&quot;) || action.equals(&quot;searchCatererEvent&quot;) || action.equals(&quot;requestEvent&quot;) || action.equals(&quot;searchUserEvent&quot;) ) {</span>
+<span class="nc" id="L271">			errorMsgs.setEventDateError(validateEventDate(event.getDate(), event.getTime()));</span>
+<span class="nc" id="L272">		}</span>
+		else { //action = Reserve
+<span class="nc" id="L274">			errorMsgs.setEventDateError(validateEventDateReserve(event.getDate(), event.getTime(), event.getUsername()));</span>
+			
+		}
+		
+<span class="fc" id="L278">		errorMsgs.setErrorMsg();</span>
+<span class="fc" id="L279">	}</span>
+
+	private String validateUserNames(String last, String first) {
+<span class="fc" id="L282">		String result=&quot;&quot;;</span>
+<span class="fc bfc" id="L283" title="All 2 branches covered.">		if (!EventDAO.namesMatch(last, first))</span>
+<span class="fc" id="L284">			result = &quot;No name found for expected role&quot;;</span>
+<span class="fc" id="L285">		return result;</span>
+	}
+	
+	private String validateEventDate(String date, String time) {
+<span class="fc" id="L289">		String result=&quot;&quot;;</span>
+<span class="fc" id="L290">		String currentDate =</span>
+<span class="fc" id="L291">				new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).format(Calendar.getInstance().getTime());</span>
+<span class="fc" id="L292">		String currentTime =</span>
+<span class="fc" id="L293">			new SimpleDateFormat(&quot;HH:mm&quot;).format(Calendar.getInstance().getTime());</span>
+				
+<span class="nc" id="L295">			int dateInt = Integer.parseInt(date.substring(0,4)+date.substring(5,7)+date.substring(8));</span>
+			
+<span class="nc" id="L297">			int currentInt = Integer.parseInt(currentDate.substring(0,4)+currentDate.substring(5,7)+currentDate.substring(8));</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">			if (dateInt &lt; currentInt) </span>
+<span class="nc" id="L299">				result = &quot;Date must not be in the past&quot;;</span>
+
+<span class="nc bnc" id="L301" title="All 4 branches missed.">			else if (dateInt == currentInt &amp;&amp; time.compareTo(currentTime) &lt; 0)</span>
+<span class="nc" id="L302">				result = &quot;Date/time must not be in the past&quot;;</span>
+			
+
+<span class="nc" id="L305">		return result;</span>
+	}
+	private String validateEventDateReserve(String date, String time, String user) {
+<span class="fc" id="L308">		String result=&quot;&quot;;</span>
+<span class="fc" id="L309">		String currentDate =</span>
+<span class="fc" id="L310">			new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).format(Calendar.getInstance().getTime());</span>
+<span class="fc" id="L311">		String currentTime =</span>
+<span class="fc" id="L312">			new SimpleDateFormat(&quot;HH:mm&quot;).format(Calendar.getInstance().getTime());</span>
+				
+<span class="nc" id="L314">			int dateInt = Integer.parseInt(date.substring(0,4)+date.substring(5,7)+date.substring(8));</span>
+<span class="nc" id="L315">			int currentInt = Integer.parseInt(currentDate.substring(0,4)+currentDate.substring(5,7)+currentDate.substring(8));</span>
+
+<span class="nc" id="L317">			String year=date.substring(0,4);</span>
+<span class="nc" id="L318">			String month=date.substring(5,7);</span>
+<span class="nc" id="L319">			String datee=date.substring(8,10);</span>
+			
+<span class="nc" id="L321">			boolean has5bookings = false;</span>
+<span class="nc" id="L322">			int d=Integer.parseInt(datee);</span>
+<span class="nc" id="L323">			int m=Integer.parseInt(month);</span>
+<span class="nc" id="L324">			int y=Integer.parseInt(year);</span>
+			
+<span class="nc" id="L326">			LocalDate reserveDate = LocalDate.of(y, m, d);</span>
+<span class="nc" id="L327">			LocalDate date1d = reserveDate;</span>
+<span class="nc" id="L328">			LocalDate date2d = reserveDate;</span>
+			
+<span class="nc bnc" id="L330" title="All 2 branches missed.">			for(int i = 0; i &lt; 7; i++) { </span>
+<span class="nc" id="L331">			    date1d = reserveDate.minusDays(6-i); </span>
+<span class="nc" id="L332">			    date2d = reserveDate.plusDays(i);</span>
+<span class="nc" id="L333">			    String date1 = date1d.toString();</span>
+<span class="nc" id="L334">			    String date2 = date2d.toString();</span>
+			    
+<span class="nc bnc" id="L336" title="All 2 branches missed.">			    if (EventDAO.eventWeekFull(date1,date2,user) &gt; 4)</span>
+<span class="nc" id="L337">			    	has5bookings = true;</span>
+			    	
+			}
+<span class="nc bnc" id="L340" title="All 2 branches missed.">			if (dateInt &lt; currentInt) </span>
+<span class="nc" id="L341">				result = &quot;Date must not be in the past&quot;;</span>
+
+<span class="nc bnc" id="L343" title="All 4 branches missed.">			else if (dateInt == currentInt &amp;&amp; time.compareTo(currentTime) &lt; 0)</span>
+<span class="nc" id="L344">				result = &quot;Date/time must not be in the past&quot;;</span>
+			
+<span class="nc bnc" id="L346" title="All 2 branches missed.">			else if (EventDAO.eventDateFull(date,user) &gt; 1)</span>
+<span class="nc" id="L347">				result = &quot;No more than 2 events can be booked per day&quot;;</span>
+				
+<span class="nc bnc" id="L349" title="All 2 branches missed.">			else if (has5bookings)</span>
+<span class="nc" id="L350">				result = &quot;No more than 5 events can be booked in a 7 day period&quot;;</span>
+				
+<span class="nc" id="L352">		return result;</span>
+	}
+
+	
+	
+	private String validateEventTime(String date, String time) {
+<span class="nc" id="L358">		String result=&quot;&quot;;</span>
+<span class="nc" id="L359">		int hour = 0;</span>
+<span class="nc" id="L360">		int minutes = 0;</span>
+<span class="nc" id="L361">		hour = Integer.parseInt(time.substring(0,2));</span>
+<span class="nc" id="L362">		minutes = Integer.parseInt(time.substring(3,5));</span>
+
+<span class="nc" id="L364">		LocalDate localDate = LocalDate.parse(date);</span>
+<span class="nc" id="L365">		int day = localDate.getDayOfWeek().getValue();</span>
+			
+<span class="nc bnc" id="L367" title="All 4 branches missed.">		if (day == 7 &amp;&amp; hour &lt; 12)</span>
+<span class="nc" id="L368">			result = &quot;Catering begins at noon on Sundays&quot;;</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">		else if (hour &lt; 7)</span>
+<span class="nc" id="L370">			result = &quot;Catering begins at 7 AM&quot;;</span>
+<span class="nc bnc" id="L371" title="All 10 branches missed.">		else if (!(day == 5 || day == 6) &amp;&amp; ((hour &gt; 20 &amp;&amp; minutes != 0) || (hour &gt; 21)))</span>
+<span class="nc" id="L372">			result = &quot;Your time must be before 9 PM on weekdays&quot;;</span>
+		
+		
+<span class="nc" id="L375">		return result;</span>
+	}
+	
+	private String validateDuration(String date, String time, String duration, String hall) {
+<span class="fc" id="L379">		String result=&quot;&quot;;</span>
+<span class="fc" id="L380">		double timed = Double.parseDouble(time.substring(0,2)) + Double.parseDouble(time.substring(3,5))/60.0;</span>
+<span class="fc" id="L381">		double durd = Double.parseDouble(duration);</span>
+<span class="nc" id="L382">		LocalDate localDate = LocalDate.parse(date);</span>
+<span class="nc" id="L383">		int day = localDate.getDayOfWeek().getValue();</span>
+<span class="nc" id="L384">		ArrayList&lt;Event&gt; list = EventDAO.hallConflict(date, timed, durd, hall);</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">		for (int i = 0; i &lt; list.size(); i++) {</span>
+<span class="nc" id="L386">			String stime = list.get(i).getTime();</span>
+<span class="nc" id="L387">			String sdur = list.get(i).getDuration();</span>
+<span class="nc" id="L388">			double etime = Double.parseDouble(stime.substring(0,2)) + Double.parseDouble(stime.substring(3,5))/60.0;</span>
+<span class="nc" id="L389">			double edur = Double.parseDouble(sdur);</span>
+<span class="nc bnc" id="L390" title="All 4 branches missed.">			if (((etime - timed) &gt;= .0 &amp;&amp; (timed + durd - etime) &gt;= .0) ||</span>
+<span class="nc bnc" id="L391" title="All 4 branches missed.">					 ((etime+edur) - timed) &gt;= .0 &amp;&amp; (timed + durd - (etime+edur)  &gt;= .0) || </span>
+<span class="nc bnc" id="L392" title="All 4 branches missed.">					 ((etime+edur) - timed) &gt;= .0 &amp;&amp; (timed + durd - etime) &gt;= .0) </span>
+<span class="nc" id="L393">					result = &quot;Hall is already booked at that time&quot;;</span>
+		}
+<span class="nc bnc" id="L395" title="All 12 branches missed.">		if ((!(day == 5 || day == 6) &amp;&amp; ((23-timed) &lt; durd)) || ((day == 5 || day == 6) &amp;&amp; ((26-timed) &lt; durd)))</span>
+<span class="nc" id="L396">			result = &quot;Duration cannot exceed close time&quot;;</span>
+		
+<span class="nc" id="L398">		return result;</span>
+	}
+		
+	private String validateDurationUpdate(String date, String time, String duration, String hall, int id) {
+<span class="nc" id="L402">		String result=&quot;&quot;;</span>
+<span class="nc" id="L403">		double timed = Double.parseDouble(time.substring(0,2)) + Double.parseDouble(time.substring(3,5))/60.0;</span>
+<span class="nc" id="L404">		double durd = Double.parseDouble(duration);</span>
+<span class="nc" id="L405">		LocalDate localDate = LocalDate.parse(date);</span>
+<span class="nc" id="L406">		int day = localDate.getDayOfWeek().getValue();</span>
+<span class="nc" id="L407">		ArrayList&lt;Event&gt; list = EventDAO.hallConflict(date, timed, durd, hall, id);</span>
+		
+<span class="nc bnc" id="L409" title="All 2 branches missed.">		for (int i = 0; i &lt; list.size(); i++) {</span>
+<span class="nc" id="L410">			String stime = list.get(i).getTime();</span>
+<span class="nc" id="L411">			String sdur = list.get(i).getDuration();</span>
+<span class="nc" id="L412">			double etime = Double.parseDouble(stime.substring(0,2)) + Double.parseDouble(stime.substring(3,5))/60.0;</span>
+<span class="nc" id="L413">			double edur = Double.parseDouble(sdur);</span>
+<span class="nc bnc" id="L414" title="All 4 branches missed.">			if (((etime - timed) &gt; .01 &amp;&amp; (timed + durd - etime) &gt; .01) ||</span>
+<span class="nc bnc" id="L415" title="All 4 branches missed.">					 ((etime+edur) - timed) &gt; .01 &amp;&amp; (timed + durd - (etime+edur)  &gt; .01) || </span>
+<span class="nc bnc" id="L416" title="All 4 branches missed.">					 ((etime+edur) - timed) &gt; .01 &amp;&amp; (timed + durd - etime) &gt; .01) </span>
+<span class="nc" id="L417">					result = &quot;Hall is already booked at that time&quot;;</span>
+		}
+<span class="nc bnc" id="L419" title="All 12 branches missed.">		if ((!(day == 5 || day == 6) &amp;&amp; ((23-timed) &lt; durd)) || ((day == 5 || day == 6) &amp;&amp; ((26-timed) &lt; durd)))</span>
+<span class="nc" id="L420">			result = &quot;Duration cannot exceed close time&quot;;</span>
+<span class="nc" id="L421">		return result;</span>
+	}
+	
+	private String validateAttendees(String hall, String attendees) {
+<span class="nc" id="L425">		String result = &quot;&quot;;</span>
+<span class="nc" id="L426">		int cap = EventDAO.hallCapacity(hall);</span>
+
+<span class="nc bnc" id="L428" title="All 2 branches missed.">		if (!isTextAnInteger(attendees))</span>
+<span class="nc" id="L429">			result=&quot;Estimated attendees must be a number&quot;;</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">		else if(Integer.parseInt(attendees) &lt;= 0) </span>
+<span class="nc" id="L431">			result = &quot;Estimated attendees must be greater than 0&quot;;</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">		else if (Integer.parseInt(attendees) &gt; cap)</span>
+<span class="nc" id="L433">			result = hall+&quot; hall only holds &quot;+ cap+&quot; people.&quot;;</span>
+		
+<span class="nc" id="L435">		return result;</span>
+	}
+	
+	private String validateEventName(String name, int id) {
+<span class="nc" id="L439">		String result=&quot;&quot;;</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">		if (!stringSize(name,3,29))</span>
+<span class="nc" id="L441">			result= &quot;Event name length must be &gt;2 and &lt;30&quot;;</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">		else if (!Character.isUpperCase(name.charAt(0)))</span>
+<span class="nc" id="L443">			result = &quot;Event name must start with a capital letter&quot;;</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">		else if (!EventDAO.isUnique(name, id))</span>
+<span class="nc" id="L445">			result = &quot;Event names must be unique&quot;;</span>
+<span class="nc" id="L446">		return result;		</span>
+	}
+	
+	private String validateCaterer(String date, String time, String duration, String last, String first) {
+<span class="fc" id="L450">		String result = &quot;&quot;;</span>
+		
+<span class="fc bfc" id="L452" title="All 2 branches covered.">		if (!EventDAO.isCaterer(last, first)) </span>
+<span class="fc" id="L453">			result = &quot;name entered is not a caterer&quot;;</span>
+<span class="fc" id="L454">		return result;</span>
+	}
+
+//	This section is for general purpose methods used internally in this class
+	
+	private boolean stringSize(String string, int min, int max) {
+<span class="nc bnc" id="L460" title="All 4 branches missed.">		return string.length()&gt;=min &amp;&amp; string.length()&lt;=max;</span>
+	}
+	private boolean isTextAnInteger (String string) {
+        boolean result;
+		try
+        {
+<span class="nc" id="L466">            Long.parseLong(string);</span>
+<span class="nc" id="L467">            result=true;</span>
+<span class="nc" id="L468">        } </span>
+<span class="nc" id="L469">        catch (NumberFormatException e) </span>
+        {
+<span class="nc" id="L471">            result=false;</span>
+        }
+<span class="nc" id="L473">		return result;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

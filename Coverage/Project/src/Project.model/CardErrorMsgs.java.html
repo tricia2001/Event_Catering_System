@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CardErrorMsgs.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">CardErrorMsgs.java</span></div><h1>CardErrorMsgs.java</h1><pre class="source lang-java linenums">package Project.model;
+
+public class CardErrorMsgs {
+
+	private String errorMsg;
+	private String cardNumberError;
+	private String cardPinError;
+	private String cardExpError;
+	
+<span class="fc" id="L10">	public CardErrorMsgs() {</span>
+<span class="fc" id="L11">		this.errorMsg = &quot;&quot;;</span>
+<span class="fc" id="L12">	}</span>
+
+	public String getErrorMsg() {
+<span class="fc" id="L15">		return errorMsg;</span>
+	}
+//
+//  NOTE: 	The following code is not representative of how this would be coded in an industrial application.
+//			We are using this code to maximize the ability of Pit to mutate the code to determine how
+//			good the developed test cases are. This course is using this Java backend code as an application
+//			of the principles learned in CSE 5321 only.
+//	
+	public void setErrorMsg() {
+<span class="fc bfc" id="L24" title="All 6 branches covered.">		if (!cardNumberError.equals(&quot;&quot;) || !cardPinError.equals(&quot;&quot;) || !cardExpError.equals(&quot;&quot;))</span>
+<span class="fc" id="L25">			this.errorMsg = &quot;Please correct the following errors&quot;;</span>
+<span class="fc" id="L26">	}</span>
+	public String getCardNumberError() {
+<span class="fc" id="L28">		return cardNumberError;</span>
+	}
+
+	public void setCardNumberError(String cardNumberError) {
+<span class="fc" id="L32">		this.cardNumberError = cardNumberError;</span>
+<span class="fc" id="L33">	}</span>
+
+	public String getCardPinError() {
+<span class="fc" id="L36">		return cardPinError;</span>
+	}
+
+	public void setCardPinError(String cardPinError) {
+<span class="fc" id="L40">		this.cardPinError = cardPinError;</span>
+<span class="fc" id="L41">	}</span>
+
+	public String getCardExpError() {
+<span class="fc" id="L44">		return cardExpError;</span>
+	}
+
+	public void setCardExpError(String cardExpError) {
+<span class="fc" id="L48">		this.cardExpError = cardExpError;</span>
+<span class="fc" id="L49">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CreditCardTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Mar 30, 2020 2:15:02 PM)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">Project.model</a> &gt; <span class="el_source">CreditCardTest.java</span></div><h1>CreditCardTest.java</h1><pre class="source lang-java linenums">package Project.model;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import junitparams.FileParameters;
+import junitparams.JUnitParamsRunner;
+
+@RunWith(JUnitParamsRunner.class)
+<span class="fc" id="L13">public class CreditCardTest {</span>
+	
+	CreditCard card;
+	CardErrorMsgs Cerrors;
+
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L20">		card = new CreditCard();</span>
+<span class="fc" id="L21">		Cerrors = new CardErrorMsgs();</span>
+<span class="fc" id="L22">	}</span>
+
+	@Test
+	@FileParameters(&quot;test/Project/model/Card_test_cases.csv&quot;)
+	public void test(int testcase, String cardNo, String cardPin, String cardExp, String errorMsg,
+			String cardNoError, String cardPinError, String cardExpError) {
+		
+<span class="fc" id="L29">		card.setCard(cardNo, cardPin, cardExp);</span>
+		
+<span class="fc" id="L31">		card.validateCard(card, Cerrors);</span>
+		/*
+		System.out.println(&quot;test case &quot;+testcase);
+		System.out.println(&quot;errorMsg = &quot;+Eerrors.getErrorMsg());
+		System.out.println(&quot;eventDateError = &quot;+Eerrors.getEventDateError());
+		System.out.println(&quot;eventTimeError = &quot;+Eerrors.getEventTimeError());
+		System.out.println(&quot;durationError = &quot;+Eerrors.getDurationError());
+		System.out.println(&quot;attendeeError = &quot;+Eerrors.getAttendeeError());
+		System.out.println(&quot;eventNameError = &quot;+Eerrors.getEventNameError());
+		System.out.println(&quot;catererError = &quot;+Eerrors.getCatererError());
+		System.out.println(&quot;userNamesError = &quot;+Eerrors.getUserNamesError());
+		*/
+		
+<span class="fc" id="L44">		assertTrue(errorMsg.equals(Cerrors.getErrorMsg()));</span>
+<span class="fc" id="L45">		assertTrue(cardNoError.equals(Cerrors.getCardNumberError()));</span>
+<span class="fc" id="L46">		assertTrue(cardPinError.equals(Cerrors.getCardPinError()));</span>
+<span class="fc" id="L47">		assertTrue(cardExpError.equals(Cerrors.getCardExpError()));</span>
+		
+<span class="fc" id="L49">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>test (Mar 30, 2020 2:15:02 PM)</div></body></html>
