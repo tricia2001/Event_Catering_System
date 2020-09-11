@@ -1,0 +1,12 @@
+1,1111222233334444,1234,0321,,,,
+2,aaaabbbbccccdddd,1234,0321,Please correct the following errors,Credit card number must be a number,,
+3,111122223333444,1234,0321,Please correct the following errors,Credit card number must be 16 digits,,
+4,11112222333344445,1234,0321,Please correct the following errors,Credit card number must be 16 digits,,
+5,1111222233334444,abcd,0321,Please correct the following errors,,Credit card pin must be a number,
+6,1111222233334444,123,0321,Please correct the following errors,,Credit card pin must be 4 digits,
+7,1111222233334444,12345,0321,Please correct the following errors,,Credit card pin must be 4 digits,
+8,1111222233334444,1234,abcd,Please correct the following errors,,,Credit card exp date must be a number
+9,1111222233334444,1234,32,Please correct the following errors,,,Credit card exp date must be 4 digits
+10,1111222233334444,1234,03217,Please correct the following errors,,,Credit card exp date must be 4 digits
+11,1111222233334444,1234,last,Please correct the following errors,,,Credit card exp date must not be in the past
+12,1111222233334444,1234,this,,,,
