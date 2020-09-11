@@ -1,0 +1,5 @@
+1,Login,smithfd,098heriuet,,Main,Please correct the following errors,Date:,4012020,Start Time:,11:00AM,Date must not be in the past
+2,Login,smithfd,098heriuet,,Main,Please correct the following errors,Date:,Today,Start Time:,07:00AM,Date/time must not be in the past
+3,Login,kilgo66,12345,,Main,Please correct the following errors,Date:,06052020,Start Time:,07:00AM,No more than 5 events can be booked in a 7 day period
+4,Login,kilgo66,12345,,Main,Please correct the following errors,Date:,06162020,Start Time:,07:00AM,No more than 2 events can be booked per day
+5,Login,smithfd,098heriuet,Request Event,Main,,Date:,5152020,Start Time:,11:00AM,

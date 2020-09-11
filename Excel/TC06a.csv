@@ -1,0 +1,13 @@
+1,5282020,04:00PM,2 hours,Maverick,101,event,American,Breakfast,formal,alcohol,music,Please correct the following errors,Hall is already booked at that time,Estimated attendees must be <=100,Event name must start with a capital letter,,,,,,,,,,,,,,,,,
+2,5152020,11:00PM,4 hours,KC,26,Ev,American,Breakfast,formal,alcohol,music,Please correct the following errors,Duration cannot exceed close time,Chosen hall too small,Event name length must be >2 and <30,,,,,,,,,,,,,,,,,
+3,5152020,01:00PM,4 hours,Arlington,tt,My Event,American,Breakfast,formal,alcohol,music,Please correct the following errors,,Estimated attendees must be a number,Event names must be unique,,,,,,,,,,,,,,,,,
+7,5152020,01:00PM,4 hours,Liberty,0,Software Testing,American,Breakfast,formal,alcohol,music,Please correct the following errors,,Estimated attendees must be greater than 0,,,,,,,,,,,,,,,,,,
+8,5152020,01:00PM,2 hours,Maverick,20,Software Testing 1,American,Breakfast,formal,alcohol,music,,,,,Request Event,Reserve User Event,Main,Last Name:,First Name:,Date:,Start Time:,Duration:,Hall Name:,Estimated Attendees:,Event Name:,Food Type:,Meal:,Meal Formality:,Drink Type:,Entertainment:,Event Status:
+9,5152020,01:00PM,3 hours,KC,20,Software Testing 2,Chinese,Lunch,informal,non-alcohol,non-music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+10,5162020,01:00PM,4 hours,Arlington,20,Software Testing 3,French,Supper,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+11,5172020,01:00PM,5 hours,Liberty,20,Software Testing 4,Greek,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+12,5182020,01:00PM,6 hours,Shard,20,Software Testing 5,Indian,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+13,5222020,01:00PM,7 hours,Maverick,20,Software Testing 6,Italian,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+14,5232020,01:00PM,8 hours,Maverick,20,Software Testing 7,Japanese,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+15,5242020,01:00PM,2 hours,Maverick,20,Software Testing 8,Mexican,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
+16,5252020,01:00PM,2 hours,Maverick,20,Software Testing 100,Pizza,Breakfast,formal,alcohol,music,,,,,,Reserve User Event,,,,,,,,,,,,,,,
